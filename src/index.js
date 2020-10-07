@@ -3,7 +3,9 @@ import morgan from "morgan";
 import cors from "cors";
 import path from "path";
 import "./database";
-import productosRouter from "./routes/producto.routes";
+import travelRouter from "./routes/travel.routes";
+import conveyanceRouter from "./routes/conveyance.routes";
+import personRouter from "./routes/person.routes";
 const app = express();
 
 //Middlewares (funciones que se ejecutan antes de llegar a las rutas)
@@ -21,8 +23,9 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.set("port", process.env.PORT || 4000); //Si esxiste esa variable, se guardara en este objeto.
 
 //Definir rutas
-app.use('/api/cafeteria', productosRouter);
-
+app.use("/api/forEach", travelRouter);
+app.use("/api/forEach/person", personRouter);
+app.use("/api/forEach/conveyance", conveyanceRouter);
 //Escuchar el puerto
 app.listen(app.get("port"), () => {
   console.log(path.join(__dirname, "../public"));
