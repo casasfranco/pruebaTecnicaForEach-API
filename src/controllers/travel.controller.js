@@ -1,11 +1,28 @@
 import Travel from "../models/travel";
+import Conveyance from "../models/conveyance";
+import Person from "../models/person";
+
 const travelCtrl = {};
 
 travelCtrl.getTravels = async (req, res) => {
   try {
-    const data = await Travel.find(); // busca todos los documentos(select)
-    res.status(200).json(data);
+    const data = await Travel.find({}, (err, travels) => {
+      Person.populate(
+        travels,
+        { path: "listOfPersonsSelected" },
+        (err, travels) => {
+          Conveyance.populate(
+            travels,
+            { path: "conveyance" },
+            (err, travels) => {
+              res.status(200).send(travels);
+            }
+          );
+        }
+      );
+    });
   } catch (error) {
+    console.log(error);
     res.status(400).json({
       ok: false,
       mensaje: "ocurrio un error al obtener los viajes",
@@ -13,6 +30,24 @@ travelCtrl.getTravels = async (req, res) => {
     next(error);
   }
 };
+
+// travelCtrl.getTravels = async (req, res) => {
+//   try {
+//     const data = await Travel.find({}, (err, travels) => {
+
+//       Conveyance.populate(travels, { path: "conveyance" }, (err, travels) => {
+//         res.status(200).send(travels);
+//       });
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(400).json({
+//       ok: false,
+//       mensaje: "ocurrio un error al obtener los viajes",
+//     });
+//     next(error);
+//   }
+// };
 
 travelCtrl.createTravel = async (req, res) => {
   console.log(req.body);

@@ -4,9 +4,8 @@ import Person from "./person";
 
 const travelSchema = new Schema(
   {
-    typeOfTrip: { type: String, maxlength: 40, required: true },
+    typeOfTrip: { type: Boolean, required: true },
     conveyance: { type: Schema.ObjectId, ref: "Conveyance" },
-    // conveyance: { type: String, maxlength: 120, required: true },
     distance: { type: Number, required: true, min: 0 },
     arrivalAddress: { type: String, maxlength: 40, required: true },
     departureAddress: { type: String, maxlength: 40, required: true },
