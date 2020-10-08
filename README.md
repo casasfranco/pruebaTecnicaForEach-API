@@ -2,6 +2,14 @@
  <br>
 👨🏽‍💻 Casas, Franco Agustín.
 
+
+## ❗ IMPORTANTE ❗
+### Se deben cargar los datos manualmente para poder utilizar la prueba tecnica.
+ - Cargar personas (consultar modelo de la DB)
+ - Cargar medios de transporte
+<br>
+<br>
+
 # Introducción
 Api diseñada para interactuar con la app del repositorio: 
 <br>
